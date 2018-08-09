@@ -1,0 +1,50 @@
+include _var
+include _mixin
+
+doctype html
+html(lang="en")
+    head
+        meta(charset='utf-8')
+        block _head
+            //- link(rel='icon', type='image/jpeg', href='/admin/static/img/favicon.png')
+            block head
+                if title
+                    title= title
+                else
+                    title Default title
+
+            block _endHead
+                +style(
+                        'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons',
+                        'https://unpkg.com/vuetify/dist/vuetify.min.css',
+                        '/static/css/style.css'
+                    )
+                meta(name='viewport', content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui')
+                block styles
+    body
+
+        #app
+            v-app
+                block header
+                    include partialAppHeader
+
+                main
+                    noti(:text='notiMess', :snackbar='notiShow')
+                    v-content
+                        v-container(fluid0='')
+                            v-fade-transition(mode='out-in')
+                                block content
+                                    router-view
+
+                block footer
+                    include partialAppFooter
+
+        block _endBody
+
+            //- +script(
+                    '/admin/static/node_modules/jquery/jquery.min.js',
+                    '/admin/static/node_modules/angular/angular.min.js',
+                    '/admin/static/node_modules/material-design-lite/material.min.js'
+                )
+
+            block scripts
